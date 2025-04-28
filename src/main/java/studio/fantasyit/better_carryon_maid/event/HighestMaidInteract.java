@@ -5,15 +5,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import studio.fantasyit.better_carryon_maid.BetterCarryonMaid;
 import tschipp.carryon.Constants;
 import tschipp.carryon.common.carry.CarryOnData;
 import tschipp.carryon.common.carry.CarryOnDataManager;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = BetterCarryonMaid.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, modid = BetterCarryonMaid.MODID)
 public class HighestMaidInteract {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void preventInteract(InteractMaidEvent event) {

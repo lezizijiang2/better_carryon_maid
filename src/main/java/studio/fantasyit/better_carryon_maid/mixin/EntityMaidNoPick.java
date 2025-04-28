@@ -18,8 +18,9 @@ public abstract class EntityMaidNoPick extends TamableAnimal {
 
     @Override
     public boolean isPickable() {
-        if (getVehicle() instanceof Player)
+        if (getVehicle() instanceof Player) {
             return false;
+        }
         return super.isPickable();
     }
 }

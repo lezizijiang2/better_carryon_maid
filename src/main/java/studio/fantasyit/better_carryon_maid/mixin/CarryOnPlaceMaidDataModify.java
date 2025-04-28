@@ -27,8 +27,9 @@ public class CarryOnPlaceMaidDataModify {
     private static Entity modifyData(Entity entity, @Local(argsOnly = true) ServerPlayer player) {
         if (entity instanceof EntityMaid) {
             Entity firstPassenger = player.getFirstPassenger();
-            if (firstPassenger != null)
+            if (firstPassenger != null) {
                 return firstPassenger;
+            }
             return new AreaEffectCloud(player.level(), 0.0, 0.0, 0.0);
         }
         return entity;

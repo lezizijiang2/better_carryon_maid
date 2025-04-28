@@ -3,30 +3,29 @@ package studio.fantasyit.better_carryon_maid.event;
 
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import studio.fantasyit.better_carryon_maid.BetterCarryonMaid;
 import tschipp.carryon.common.carry.CarryOnData;
 import tschipp.carryon.common.carry.CarryOnDataManager;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = BetterCarryonMaid.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, modid = BetterCarryonMaid.MODID)
 public class ServerPlayerTick {
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == LogicalSide.CLIENT)
+    public static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (event.getEntity().level().isClientSide()) {
             return;
-        if (event.phase == TickEvent.Phase.END) {
-            CarryOnData data = CarryOnDataManager.getCarryData(event.player);
-            if (data.isCarrying(CarryOnData.CarryType.ENTITY)) {
-                Entity carried = data.getEntity(event.player.level());
-                Entity passenger = event.player.getFirstPassenger();
-                if (carried instanceof EntityMaid && !(passenger instanceof EntityMaid)) {
-                    data.clear();
-                    CarryOnDataManager.setCarryData(event.player, data);
-                }
+        }
+        CarryOnData data = CarryOnDataManager.getCarryData(event.getEntity());
+        if (data.isCarrying(CarryOnData.CarryType.ENTITY)) {
+            Entity carried = data.getEntity(event.getEntity().level());
+            Entity passenger = event.getEntity().getFirstPassenger();
+            if (carried instanceof EntityMaid && !(passenger instanceof EntityMaid)) {
+                data.clear();
+                CarryOnDataManager.setCarryData(event.getEntity(), data);
             }
         }
     }

@@ -18,16 +18,18 @@ import tschipp.carryon.client.render.CarryRenderHelper;
 public class CarryOnDisableMaidRender {
     @ModifyVariable(method = "drawFirstPersonEntity", at = @At(value = "INVOKE_ASSIGN", target = "tschipp.carryon.client.render.CarryRenderHelper.getRenderEntity(Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/entity/Entity;"), remap = false, name = "entity")
     private static Entity renderEntity(Entity entity) {
-        if (entity instanceof EntityMaid)
+        if (entity instanceof EntityMaid) {
             return null;
+        }
 
         return entity;
     }
 
     @ModifyVariable(method = "drawThirdPerson", at = @At(value = "INVOKE_ASSIGN", target = "tschipp.carryon.client.render.CarryRenderHelper.getRenderEntity(Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/entity/Entity;"), remap = false, name = "entity")
     private static Entity renderEntityTp(Entity entity) {
-        if (entity instanceof EntityMaid)
+        if (entity instanceof EntityMaid) {
             return null;
+        }
 
         return entity;
     }

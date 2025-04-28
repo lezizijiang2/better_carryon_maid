@@ -5,6 +5,16 @@ pluginManagement {
             name = 'MinecraftForge'
             url = 'https://maven.minecraftforge.net/'
         }
+        // ParchmentMC
+        maven {
+            name = "ParchmentMC"
+            url = 'https://maven.parchmentmc.org'
+        }
+        // NeoForge
+        maven {
+            name = "Neoforged"
+            url = 'https://maven.neoforged.net/releases'
+        }
     }
 }
 

@@ -7,9 +7,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,7 +27,7 @@ public class CarryOnPickMaidDataModify {
                 if (maid.isHomeModeEnable()) {
                     maid.setHomeModeEnable(false);
                 }
-                InitTrigger.MAID_EVENT.trigger(player, TriggerType.PICKUP_MAID);
+                InitTrigger.MAID_EVENT.asOptional().ifPresent(maidEventTrigger -> maidEventTrigger.trigger(player, TriggerType.PICKUP_MAID));
                 player.connection.send(new ClientboundSetPassengersPacket(player));
                 return new EntityMaid(entity.level());
             } else {

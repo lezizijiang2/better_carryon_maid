@@ -1,8 +1,8 @@
 {
   "required": true,
-  "minVersion": "0.8",
+  "minVersion": "0.8.5",
   "package": "studio.fantasyit.better_carryon_maid.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "better_carryon_maid.refmap.json",
   "mixins": [
     "CarryOnDisableMaidRender",
