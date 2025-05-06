@@ -23,6 +23,9 @@ public class CarryOnPickMaidDataModify {
     @ModifyVariable(method = "tryPickupEntity", at = @At(value = "INVOKE", target = "tschipp.carryon.common.carry.CarryOnData.setEntity(Lnet/minecraft/world/entity/Entity;)V", shift = At.Shift.BEFORE), name = "entity", remap = false)
     private static Entity modifyData(Entity entity, @Local(argsOnly = true) ServerPlayer player) {
         if (entity instanceof EntityMaid maid) {
+            if (maid.isRideable()){
+                maid.setRideable(true);
+            }
             if (maid.startRiding(player)) {
                 if (maid.isHomeModeEnable()) {
                     maid.setHomeModeEnable(false);
